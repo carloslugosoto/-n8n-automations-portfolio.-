@@ -1,0 +1,431 @@
+{
+  "name": "Flow_Check_Supplier_Invoices_Prices_1",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
+          "mode": "list",
+          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "shopify_orders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit#gid=0"
+        },
+        "options": {}
+      },
+      "name": "Read Shopify Orders",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [
+        0,
+        208
+      ],
+      "id": "9394d51c-99c1-4a4c-82f6-cefc98c7978a",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "APxQ9blpcYKf7BzE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
+          "mode": "list",
+          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 227404401,
+          "mode": "list",
+          "cachedResultName": "quotations",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit#gid=227404401"
+        },
+        "options": {}
+      },
+      "name": "Read Quotation",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [
+        0,
+        400
+      ],
+      "id": "cedf1980-79e0-4909-86fe-e049dbdfa55d",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "APxQ9blpcYKf7BzE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
+          "mode": "list",
+          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1606510025,
+          "mode": "list",
+          "cachedResultName": "supplier_invoices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit#gid=1606510025"
+        },
+        "options": {}
+      },
+      "name": "Read Supplier Invoice",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "977f3129-6412-40b4-9c9c-57f2cfe8b888"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "row_number",
+              "field2": "row_number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Merge Orders & Invoices",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        400,
+        112
+      ],
+      "id": "fd82a6b7-e138-4ae7-9aee-79ca206834b7"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "Item SKU",
+              "field2": "Item SKU"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Merge with Quotation",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        784,
+        144
+      ],
+      "id": "35244f30-c236-47b2-ac96-9cedb9420fe1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        32
+      ],
+      "id": "c6ced091-7341-48c9-aab2-d62258b7fccb",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Preparamos un array vacío para almacenar los resultados\nconst reportItems = [];\n\n// 2. Iteramos sobre cada item de entrada (vienen del nodo anterior)\nfor (const item of items) {\n  try {\n    // 3. Extraemos los datos del item actual\n    const json = item.json;\n    \n    // 4. Validamos campos requeridos (¡aquí está el corazón de la lógica!)\n    if (!json['Order Number'] || !json['Item SKU'] || \n        isNaN(json['Unit Price']) || isNaN(json['Charged Unit Price']) || \n        isNaN(json['Quantity'])) {\n      console.log(`Item inválido omitido: ${JSON.stringify(json)}`);\n      continue; // Saltamos a la siguiente iteración si hay datos faltantes\n    }\n\n    // 5. Convertimos valores a números (evitamos strings)\n    const expectedPrice = Number(json['Unit Price']);\n    const chargedPrice = Number(json['Charged Unit Price']);\n    const shopifyQty = Number(json['Quantity']);\n\n    // 6. ¡Cálculo mágico! Diferencia = (Precio Cobrado - Precio Esperado) * Cantidad\n    const difference = (chargedPrice * shopifyQty) - (expectedPrice * shopifyQty);\n    \n    // 7. Determinamos el estado basado en la diferencia\n    const status = difference > 0 ? 'Overcharged' : \n                  difference < 0 ? 'Undercharged' : 'Correct';\n\n    // 8. Preparamos el objeto para el reporte\n    reportItems.push({\n      json: {  // <- Estructura requerida por n8n\n        'Order Number': json['Order Number'],\n        'Item SKU': json['Item SKU'],\n        'Expected Price': expectedPrice,\n        'Charged Price': chargedPrice,\n        'Quantity': shopifyQty,\n        'Status': status,\n        'Difference': difference,\n        'Invoice Row': json.row_number || null // Valor por defecto si no existe\n      }\n    });\n\n  } catch (error) {\n    // 9. Manejo de errores (por si algo falla en el bloque try)\n    console.log(`Error procesando item: ${error.message}`);\n  }\n}\n\n// 10. Devolvemos resultados (o un objeto vacío para evitar errores)\nreturn reportItems.length > 0 ? reportItems : [{ json: { placeholder: \"No valid data\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1056,
+        160
+      ],
+      "id": "2801c77c-aec1-4cf9-9ab1-e6ac7c83aff7",
+      "name": "Calculate Pricing"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
+          "mode": "list",
+          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 223187215,
+          "mode": "list",
+          "cachedResultName": "report",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit#gid=223187215"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Order Number",
+              "displayName": "Order Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Item SKU",
+              "displayName": "Item SKU",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expected Price",
+              "displayName": "Expected Price",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Charged Price",
+              "displayName": "Charged Price",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Difference",
+              "displayName": "Difference",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Invoice Row",
+              "displayName": "Invoice Row",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1344,
+        144
+      ],
+      "id": "84d2aed8-0e7d-4cb2-8d1c-467db33a570f",
+      "name": "Write Report",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "APxQ9blpcYKf7BzE",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Read Supplier Invoice": [
+      {
+        "json": {
+          "row_number": 2,
+          "Order Number": "#1001",
+          "Item SKU": "PROD-001",
+          "Charged Unit Price": 8.5,
+          "Quantity": 50
+        }
+      },
+      {
+        "json": {
+          "row_number": 3,
+          "Order Number": "#1002",
+          "Item SKU": "PROD-002",
+          "Charged Unit Price": 24,
+          "Quantity": 30
+        }
+      },
+      {
+        "json": {
+          "row_number": 4,
+          "Order Number": "#1003",
+          "Item SKU": "PROD-003",
+          "Charged Unit Price": 42.5,
+          "Quantity": 20
+        }
+      },
+      {
+        "json": {
+          "row_number": 5,
+          "Order Number": "#1004",
+          "Item SKU": "PROD-004",
+          "Charged Unit Price": 5,
+          "Quantity": 100
+        }
+      },
+      {
+        "json": {
+          "row_number": 6,
+          "Order Number": "#1005",
+          "Item SKU": "PROD-005",
+          "Charged Unit Price": 38,
+          "Quantity": 15
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Read Supplier Invoice": {
+      "main": [
+        [
+          {
+            "node": "Merge Orders & Invoices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Shopify Orders": {
+      "main": [
+        [
+          {
+            "node": "Merge Orders & Invoices",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Orders & Invoices": {
+      "main": [
+        [
+          {
+            "node": "Merge with Quotation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Quotation": {
+      "main": [
+        [
+          {
+            "node": "Merge with Quotation",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read Supplier Invoice",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Shopify Orders",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Quotation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge with Quotation": {
+      "main": [
+        [
+          {
+            "node": "Calculate Pricing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Pricing": {
+      "main": [
+        [
+          {
+            "node": "Write Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9f3e7e26-8298-41e0-b5b3-b142aa982b04",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf2ffe634d0ceff7b174ba42341e3633a41138685343a2f1c4e3ae86249e00db"
+  },
+  "id": "1tumom0cqlp1qVKz",
+  "tags": []
+}
