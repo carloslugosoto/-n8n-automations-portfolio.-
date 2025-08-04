@@ -21,8 +21,7 @@
 
 ### 📁 Datos de Ejemplo
 Descarga el archivo modelo con datos de prueba:  
-[-n8n-automations-portfolio.-
-/Flow_Check_Supplier_Invoices_Prices .xlsx)
+[🔽 Flow_Check_Supplier_Invoices_Prices.xlsx](https://github.com/tu-usuario/n8n-automations-portfolio/blob/main/Flow_Check_Supplier_Invoices_Prices.xlsx)
 
 Contiene:
 - 3 hojas pre-formateadas
