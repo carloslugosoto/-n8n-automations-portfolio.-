@@ -21,7 +21,7 @@
 
 ### 📁 Datos de Ejemplo
 Descarga el archivo modelo con datos de prueba:  
-📊 [Ver archivo Excel de validación de precios](Flow_Check_Supplier_Invoices_Prices.xlsx)
+📊 [Ver archivo Excel de validación de precios] (https://github.com/carloslugosoto/-n8n-automations-portfolio.-/blob/main/Flow_Check_Supplier_Invoices_Prices%20.xlsx))
  
 
 Contiene:
