@@ -1,6 +1,6 @@
 # 🧾 Flujo n8n: Validador de Facturas de Proveedores vs Shopify
 
-Diagram_Flow_Check_Supplier_Invoices_Prices.png  
+Diagram_Flow_Check_Supplier_Invoices_Prices.png
 *Valida discrepancias de precios entre facturas de proveedores, órdenes Shopify y cotizaciones*
 
 ## 🌟 Características Principales
