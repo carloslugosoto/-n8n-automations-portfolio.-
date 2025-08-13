@@ -1,5 +1,5 @@
 {
-  "name": "Flow_Check_Supplier_Invoices_Prices_1",
+  "name": "n8n_sheets_invoice_validator",
   "nodes": [
     {
       "parameters": {
@@ -7,7 +7,7 @@
           "__rl": true,
           "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
           "mode": "list",
-          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultName": "n8n_sheets_invoice_validator ",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
         },
         "sheetName": {
@@ -40,7 +40,7 @@
           "__rl": true,
           "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
           "mode": "list",
-          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultName": "n8n_sheets_invoice_validator ",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
         },
         "sheetName": {
@@ -73,7 +73,7 @@
           "__rl": true,
           "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
           "mode": "list",
-          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultName": "n8n_sheets_invoice_validator ",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
         },
         "sheetName": {
@@ -169,7 +169,7 @@
           "__rl": true,
           "value": "1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o",
           "mode": "list",
-          "cachedResultName": "Flow_Check_Supplier_Invoices_Prices ",
+          "cachedResultName": "n8n_sheets_invoice_validator ",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ygES27BKAnWl3N46SIpIq4zPEUTOErPYzIuF6Z42V4o/edit?usp=drivesdk"
         },
         "sheetName": {
