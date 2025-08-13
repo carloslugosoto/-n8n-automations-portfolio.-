@@ -1,0 +1,47 @@
+<svg width="900" height="400" viewBox="0 0 900 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="900" height="400" fill="white"/>
+<g transform="translate(10, 10)">
+<text x="450" y="25" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Diagrama: Validador de Facturas de Proveedores</text>
+
+<!-- Nodos de Entrada -->
+<rect x="20" y="50" width="200" height="50" rx="10" fill="#D6EAF8" stroke="#3498DB" stroke-width="2"/>
+<text x="120" y="80" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Leer Órdenes Shopify</text>
+
+<rect x="20" y="150" width="200" height="50" rx="10" fill="#D6EAF8" stroke="#3498DB" stroke-width="2"/>
+<text x="120" y="180" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Leer Facturas Proveedor</text>
+
+<rect x="20" y="250" width="200" height="50" rx="10" fill="#D6EAF8" stroke="#3498DB" stroke-width="2"/>
+<text x="120" y="280" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Leer Cotizaciones</text>
+
+<!-- Primer Merge -->
+<path d="M220 75 L 300 125" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M220 175 L 300 125" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="350" cy="125" r="50" fill="#FAD7A0" stroke="#F39C12" stroke-width="2"/>
+<text x="350" y="120" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Merge</text>
+<text x="350" y="140" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">(Órdenes y Facturas)</text>
+
+<!-- Segundo Merge -->
+<path d="M400 125 H 480" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M220 275 L 530 175 L 530 125" stroke="#333" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+<circle cx="580" cy="125" r="50" fill="#FAD7A0" stroke="#F39C12" stroke-width="2"/>
+<text x="580" y="120" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Merge</text>
+<text x="580" y="140" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">(con Cotizaciones)</text>
+
+<!-- Procesamiento y Salida -->
+<path d="M630 125 H 710" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="710" y="100" width="160" height="50" rx="10" fill="#D1F2EB" stroke="#1ABC9C" stroke-width="2"/>
+<text x="790" y="130" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Calcular Precios</text>
+<text x="790" y="115" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#2c3e50">(Nodo Code)</text>
+
+<path d="M790 150 V 230" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="710" y="230" width="160" height="50" rx="10" fill="#E8DAEF" stroke="#8E44AD" stroke-width="2"/>
+<text x="790" y="260" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">Escribir Informe</text>
+<text x="790" y="245" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#2c3e50">(Google Sheets)</text>
+
+</g>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+</marker>
+</defs>
+</svg>
